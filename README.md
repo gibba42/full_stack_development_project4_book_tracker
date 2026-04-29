@@ -28,21 +28,21 @@ The application enables users to:
 - Add structured notes and ratings
 - Analyse books from a writer’s perspective (themes, structure, character arcs)
 
-## Target Audience
+### Target Audience
 
 - Readers who want to track books they've read
 - Aspiring authors analysing storytelling techniques
 - Students studying literature
 - Casual users looking for a personal reading log
 
-## Project Goals
+### Project Goals
 
 - Provide a clean, intuitive UI for managing books
 - Implement full CRUD functionality for user-generated content
 - Ensure secure authentication and role-based access
 - Follow Agile methodology to plan and deliver the application
 
-## User Stories
+### User Stories
 
 More detailed User Stories are captured in Github issues, but at a high-level this application aims to meet the following wants:
 
