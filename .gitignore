@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+db.sqllite3
+staticfiles/
+media/
+.venv/
+env.py
