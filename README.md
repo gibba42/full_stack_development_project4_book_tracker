@@ -54,6 +54,17 @@ More detailed User Stories are captured in Github issues, but at a high-level th
 - As a user, I want to edit or delete entries so that I can manage my data
 - As a user, I want to register an account so that my data is secure
 
+## ERD Diagrams
+
+### User model
+
+This project uses Django's build in user model
+
+### Book notes
+
+| Key | Title | Type |
+|-----|-------|------|
+
 ## Wireframes
 
 The wireframes for this project were developed using Figma. 
