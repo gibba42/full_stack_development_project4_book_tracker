@@ -65,3 +65,9 @@ The wireframes for this project were developed using Figma.
 ### Login page
 
 ### My Library page
+
+## Bugs
+
+| Title | Description | Fix | Status |
+|-------|-------------|-----|--------|
+| Heroku build failing | The project was not building correctly in Heroku, and was showing an "Application Error". | Updated the requirements.txt file based on the build logs to specify the latest version of gunicorn, and added a .python-version file to specify the version of python Heroku should use. | Resolved |
