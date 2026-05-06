@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Tracker</title>
+</head>
+<body>
+    <header>
+        <nav aria-label="Main navigation">
+            <a href="{% url 'index' %}">Book Tracker</a>
+
+            <ul>
+                <li>
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'profile' %}">My Account</a>
+                    </li>
+
+                    {% if user.is_staff %}
+                        <li>
+                            <a href="{% url 'staff_dashboard' %}">
+                                Staff Dashboard
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Log out</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'login' %}">Log in</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    {% if messages %}
+        <section aria-label="Site messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </section>
+    {% endif %}
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
