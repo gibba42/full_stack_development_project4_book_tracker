@@ -60,6 +60,11 @@ More detailed User Stories are captured in Github issues, but at a high-level th
 
 This project uses Django's build in user model
 
+### Book model
+
+| Key | Title | Type |
+|-----|-------|------|
+
 ### Book notes
 
 | Key | Title | Type |
