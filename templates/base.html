@@ -17,9 +17,17 @@
                     <a href="{% url 'index' %}">Home</a>
                 </li>
 
+                <li>
+                    <a href="{% url 'book_search' %}">Search for Books</a>
+                </li>
+
                 {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'profile' %}">My Account</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'my_library' %}">My Library</a>
                     </li>
 
                     <li>
