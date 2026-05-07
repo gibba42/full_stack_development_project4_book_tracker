@@ -22,14 +22,6 @@
                         <a href="{% url 'profile' %}">My Account</a>
                     </li>
 
-                    {% if user.is_staff %}
-                        <li>
-                            <a href="{% url 'staff_dashboard' %}">
-                                Staff Dashboard
-                            </a>
-                        </li>
-                    {% endif %}
-
                     <li>
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}

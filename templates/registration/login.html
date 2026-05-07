@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h1>Log in to Book Tracker</h1>
+
+    <p>
+        Log in to access your saved books, ratings, and reading notes.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <div>
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+
+        <div>
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+
+        <button type="submit">Log in</button>
+    </form>
+
+    <p>
+        Need an account?
+        <a href="{% url 'register' %}">Create one here</a>.
+    </p>
+</section>
+{% endblock %}
