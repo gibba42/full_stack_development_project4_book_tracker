@@ -36,11 +36,15 @@ def profile(request):
 
     return render(request, 'accounts/profile.html')
 
+@login_required
+def my_library(request):
+    books = Book.objects.filter(user=request.user)
 
-def staff_required(user):
-    """Return True when the user can access staff-only pages."""
-
-    return user.is_authenticated and user.is_staff
+    return render(
+        request,
+        "book_tracker/my_library.html",
+        {"books": books}
+    )
 
 
 @user_passes_test(staff_required)

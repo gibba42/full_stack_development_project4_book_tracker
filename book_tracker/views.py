@@ -1,5 +1,77 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+from django.shortcuts import redirect, render
 
-# Create your views here.
-def index(request):
-    return render(request, 'book_tracker/index.html')
+from .models import Book
+from .services import search_open_library
+
+
+def book_search(request):
+
+    query = request.GET.get("q", "").strip()
+    sort_by = request.GET.get("sort", "")
+    has_cover = request.GET.get("has_cover") == "on"
+
+    results = []
+    error = None
+
+    if query:
+        search_response = search_open_library(
+            query=query,
+            sort_by=sort_by,
+            has_cover=has_cover
+        )
+
+        results = search_response["results"]
+        error = search_response["error"]
+
+        if error:
+            messages.error(request, error)
+        elif not results:
+            messages.info(request, "No books matched your search.")
+
+    context = {
+        "query": query,
+        "results": results,
+        "sort_by": sort_by,
+        "has_cover": has_cover,
+        "error": error,
+    }
+
+    return render(request, "book_tracker/book_search.html", context)
+
+
+@login_required
+def add_book_to_library(request):
+
+    if request.method != "POST":
+        messages.error(request, "Invalid request.")
+        return redirect("book_search")
+
+    open_library_key = request.POST.get("open_library_key")
+    title = request.POST.get("title")
+    author = request.POST.get("author", "")
+    first_publish_year = request.POST.get("first_publish_year") or None
+    cover_id = request.POST.get("cover_id") or None
+    isbn = request.POST.get("isbn", "")
+
+    if not open_library_key or not title:
+        messages.error(request, "Book details were missing. Please try again.")
+        return redirect("book_search")
+
+    try:
+        Book.objects.create(
+            user=request.user,
+            open_library_key=open_library_key,
+            title=title,
+            author=author,
+            first_publish_year=first_publish_year,
+            cover_id=cover_id,
+            isbn=isbn,
+        )
+        messages.success(request, f'"{title}" was added to your library.')
+    except IntegrityError:
+        messages.info(request, f'"{title}" is already in your library.')
+
+    return redirect("my_library")

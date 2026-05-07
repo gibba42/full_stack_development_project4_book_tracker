@@ -5,17 +5,6 @@ OPEN_LIBRARY_SEARCH_URL = "https://openlibrary.org/search.json"
 
 
 def search_open_library(query, sort_by=None, has_cover=False):
-    """
-    Searches Open Library for books matching the user's query.
-
-    Args:
-        query: Search term entered by the user.
-        sort_by: Optional sort choice used in local result sorting.
-        has_cover: If True, removes books without cover images.
-
-    Returns:
-        A dictionary with success status, results, and optional error message.
-    """
 
     if not query:
         return {
