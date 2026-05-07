@@ -6,6 +6,9 @@ from django.shortcuts import redirect, render
 from .models import Book
 from .services import search_open_library
 
+def index(request):
+    return render(request, "book_tracker/index.html")
+
 
 def book_search(request):
 
@@ -75,3 +78,13 @@ def add_book_to_library(request):
         messages.info(request, f'"{title}" is already in your library.')
 
     return redirect("my_library")
+
+@login_required
+def my_library(request):
+    books = Book.objects.filter(user=request.user)
+
+    return render(
+        request,
+        "book_tracker/my_library.html",
+        {"books": books}
+    )

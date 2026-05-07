@@ -35,20 +35,3 @@ def profile(request):
     """Display the logged-in user's account page."""
 
     return render(request, 'accounts/profile.html')
-
-@login_required
-def my_library(request):
-    books = Book.objects.filter(user=request.user)
-
-    return render(
-        request,
-        "book_tracker/my_library.html",
-        {"books": books}
-    )
-
-
-@user_passes_test(staff_required)
-def staff_dashboard(request):
-    """Display a staff-only dashboard page."""
-
-    return render(request, 'accounts/staff_dashboard.html')
