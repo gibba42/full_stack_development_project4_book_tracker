@@ -88,3 +88,23 @@ The wireframes for this project were developed using Figma.
 |-------|-------------|-----|--------|
 | Heroku build failing | The project was not building correctly in Heroku, and was showing an "Application Error". | Updated the requirements.txt file based on the build logs to specify the latest version of gunicorn, and added a .python-version file to specify the version of python Heroku should use. | Resolved |
 | manage.py runserver command failing | The server was unable to run due to an error with the models being imported. | The error was caused by the example blog post model being leftover after the project was changed to a book model. admin.py was updated to reference the correct model. | Resolved |
+
+## Tutorials and guides used
+
+### Django
+
+This project uses the Django authentication system. This was implemented using the Django documentation:
+
+[Using the Django authentication system](https://docs.djangoproject.com/en/6.0/topics/auth/default/)
+
+### Open Library
+
+To allow users to search for books, this project uses the Internet Archive's Open Library API. 
+
+[Open Library API](https://openlibrary.org/developers/api)
+
+The book search functionality was built by referencing this documentation:
+
+[Book Search API](https://openlibrary.org/dev/docs/api/search)
+
+ChatGPT was used to help integrate the API with the rest of the project. 
