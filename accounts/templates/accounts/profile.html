@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h1>My Account</h1>
+
+    <p>You are logged in as <strong>{{ user.username }}</strong>.</p>
+
+    {% if user.email %}
+        <p>Email: {{ user.email }}</p>
+    {% else %}
+        <p>No email address has been saved for this account.</p>
+    {% endif %}
+
+    <p>
+        From here, you can access your saved books,
+        ratings, and reading notes.
+    </p>
+</section>
+{% endblock %}
