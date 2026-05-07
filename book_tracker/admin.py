@@ -1,5 +1,23 @@
 from django.contrib import admin
-from .models import Post
+from .models import Book
 
-# Register your models here.
-admin.site.register(Post)
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "author",
+        "user",
+        "first_publish_year",
+        "added_on",
+    )
+    search_fields = (
+        "title",
+        "author",
+        "open_library_key",
+        "isbn",
+    )
+    list_filter = (
+        "first_publish_year",
+        "added_on",
+    )

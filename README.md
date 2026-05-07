@@ -87,3 +87,4 @@ The wireframes for this project were developed using Figma.
 | Title | Description | Fix | Status |
 |-------|-------------|-----|--------|
 | Heroku build failing | The project was not building correctly in Heroku, and was showing an "Application Error". | Updated the requirements.txt file based on the build logs to specify the latest version of gunicorn, and added a .python-version file to specify the version of python Heroku should use. | Resolved |
+| manage.py runserver command failing | The server was unable to run due to an error with the models being imported. | The error was caused by the example blog post model being leftover after the project was changed to a book model. admin.py was updated to reference the correct model. | Resolved |
