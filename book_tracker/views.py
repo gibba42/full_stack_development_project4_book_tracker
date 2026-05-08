@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import redirect, render
+from .forms import BookForm
 
 from .models import Book
 from .services import search_open_library
@@ -88,3 +89,51 @@ def my_library(request):
         "book_tracker/my_library.html",
         {"books": books}
     )
+
+@login_required
+def book_detail(request, book_id):
+    book = get_object_or_404(Book, id=book_id, user=request.user)
+
+    return render(
+        request,
+        "book_tracker/book_detail.html",
+        {"book": book}
+    )
+
+@login_required
+def edit_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id, user=request.user)
+
+    if request.method == "POST":
+        form = BookForm(request.POST, instance=book)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Book updated successfully.")
+            return redirect("book_detail", book_id=book.id)
+        else:
+            form = BookForm(instance=book)
+
+        return render(
+            request,
+            "book_tracker/book_form.html",
+            {
+                "form": form,
+                "book": book,
+            }
+        )
+    
+    @login_required
+    def delete_book(request, book_id):
+        book = get_object_or_404(Book, id=book_id, user=request.user)
+
+        if request.method == "POST":
+            book.delete()
+            messages.success(request, "Book removed from your library.")
+            return redirect("my_library")
+        
+        return render(
+            request,
+            "book_tracker/book_confirm_delete.html",
+            {"book": book}
+        )
