@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Edit {{ book.title }}</h1>
+    <p>Update the saved details for this book.</p>
+</section>
+
+<section class="form-panel" aria-labelledby="edit-book-heading">
+    <h2 id="edit-book-heading">Edit book details</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}">Title</label>
+            {{ form.title }}
+            {{ form.title.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.author.id_for_label }}">Author</label>
+            {{ form.author }}
+            {{ form.author.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.first_publish_year.id_for_label }}">
+                First publish year
+            </label>
+            {{ form.first_publish_year }}
+            {{ form.first_publish_year.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.isbn.id_for_label }}">ISBN</label>
+            {{ form.isbn }}
+            {{ form.isbn.errors }}
+        </div>
+
+        <div class="button-row">
+            <button type="submit" class="button">
+                Save Changes
+            </button>
+
+            <a href="{% url 'book_detail' book.id %}" class="button-link">
+                Cancel
+            </a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

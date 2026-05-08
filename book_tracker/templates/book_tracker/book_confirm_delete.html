@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Delete {{ book.title }}</h1>
+    <p>Please confirm whether you want to remove this book from your library.</p>
+</section>
+
+<section class="delete-confirmation" aria-labelledby="delete-book-heading">
+    <h2 id="delete-book-heading">Confirm deletion</h2>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ book.title }}</strong>
+        from your library?
+    </p>
+
+    <p>
+        This action cannot be undone.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="button-row">
+            <button type="submit" class="button">
+                Yes, delete this book
+            </button>
+
+            <a href="{% url 'book_detail' book.id %}" class="button-link">
+                Cancel
+            </a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}
