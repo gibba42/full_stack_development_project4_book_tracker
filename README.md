@@ -98,6 +98,10 @@ This project uses the Django authentication system. This was implemented using t
 
 [Using the Django authentication system](https://docs.djangoproject.com/en/6.0/topics/auth/default/)
 
+To add css styling to the project, I followed this guide:
+
+[How to manage static files in Django](https://docs.djangoproject.com/en/dev/howto/static-files/)
+
 ### Open Library
 
 To allow users to search for books, this project uses the Internet Archive's Open Library API. 
