@@ -111,17 +111,18 @@ def edit_book(request, book_id):
             form.save()
             messages.success(request, "Book updated successfully.")
             return redirect("book_detail", book_id=book.id)
-        else:
-            form = BookForm(instance=book)
 
-        return render(
-            request,
-            "book_tracker/book_form.html",
-            {
-                "form": form,
-                "book": book,
-            }
-        )
+    else:
+        form = BookForm(instance=book)
+
+    return render(
+        request,
+        "book_tracker/book_form.html",
+        {
+            "form": form,
+            "book": book,
+        }
+    )
     
 @login_required
 def delete_book(request, book_id):
