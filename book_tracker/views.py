@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import BookForm
 
 from .models import Book
@@ -123,17 +123,17 @@ def edit_book(request, book_id):
             }
         )
     
-    @login_required
-    def delete_book(request, book_id):
-        book = get_object_or_404(Book, id=book_id, user=request.user)
+@login_required
+def delete_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id, user=request.user)
 
-        if request.method == "POST":
-            book.delete()
-            messages.success(request, "Book removed from your library.")
-            return redirect("my_library")
+    if request.method == "POST":
+        book.delete()
+        messages.success(request, "Book removed from your library.")
+        return redirect("my_library")
         
-        return render(
-            request,
-            "book_tracker/book_confirm_delete.html",
-            {"book": book}
-        )
+    return render(
+        request,
+        "book_tracker/book_confirm_delete.html",
+        {"book": book}
+    )
