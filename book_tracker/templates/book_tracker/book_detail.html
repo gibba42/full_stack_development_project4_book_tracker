@@ -66,4 +66,31 @@
     </article>
 </section>
 
+<section class="book-section">
+    <h2>Your Rating</h2>
+
+    {% if book.rating %}
+    <p>
+        Your rating: {{ book.rating }} out of 5.
+    </p>
+    {% else %}
+    <p>
+        You have not rated this book yet.
+    </p>
+    {% endif %}
+
+    <form
+        method="POST"
+        action="{% url 'update_book_rating' book.id %}
+        class="book-form"
+    >
+        {% csrf_token %}
+    
+        {{ rating_form.as_p }}
+    
+        <button type="submit" class="button-link">
+            Save Rating
+        </button></form>
+</section>
+
 {% endblock %}

@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import BookForm
+from .forms import BookForm, RatingForm
 
 from .models import Book
 from .services import search_open_library
@@ -93,12 +93,31 @@ def my_library(request):
 @login_required
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)
+    rating_form = RatingForm(instance=book)
 
     return render(
         request,
         "book_tracker/book_detail.html",
-        {"book": book}
+        {
+            "book": book,
+            "rating_form": rating_form,
+            }
     )
+
+@login_required
+def update_book_rating(request, book_id):
+    book = get_object_or_404(Book, id=book_id, user=request.user)
+
+    if request.method == "POST":
+        form = RatingForm(request.POST, instance=book)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your rating was updated.")
+        else:
+            messages.error(request, "Please select a valid rating.")
+
+    return redirect("book_detail", book_id.id)
 
 @login_required
 def edit_book(request, book_id):
