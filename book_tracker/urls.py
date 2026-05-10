@@ -14,4 +14,9 @@ urlpatterns = [
         views.update_book_rating,
         name="update_book_rating"
     ),
+    path(
+        "library/<int:book_id>/notes/add/",
+        views.add_book_note,
+        name="add_book_note"
+    ),
 ]

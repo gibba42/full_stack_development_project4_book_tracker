@@ -93,4 +93,36 @@
         </button></form>
 </section>
 
+<section class="book-section">
+    <h2>Your Notes</h2>
+
+    <form
+        method="POST"
+        action="{% url 'add_book_note' book.id %}"
+        class="book-form"
+    >
+        {% csrf_token %}
+        {{ note_form.as_p }}
+
+        <button type="submit" class="button-link">
+            Add Note
+        </button>
+    </form>
+
+    <div class="notes-list">
+        {% if notes %}
+            {% for note in notes %}
+                <article class="note-card">
+                    <p>{{ note.content|linebreaks }}</p>
+                    <p class="note-date">
+                        Added on {{ note.created_on|date:"d M Y H:i" }}
+                    </p>
+                </article>
+            {% endfor %}
+        {% else %}
+            <p>No notes have been added for this book yet.</p>
+        {% endif %}
+    </div>
+</section>
+
 {% endblock %}

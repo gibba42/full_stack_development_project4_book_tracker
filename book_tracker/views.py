@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import BookForm, RatingForm
+from .forms import BookForm, RatingForm, BookNoteForm
 
 from .models import Book
 from .services import search_open_library
@@ -94,6 +94,7 @@ def my_library(request):
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)
     rating_form = RatingForm(instance=book)
+    note_form = BookNoteForm()
 
     return render(
         request,
@@ -101,6 +102,8 @@ def book_detail(request, book_id):
         {
             "book": book,
             "rating_form": rating_form,
+            "note_form": note_form,
+            "notes": book.notes.all(),
             }
     )
 
@@ -116,6 +119,25 @@ def update_book_rating(request, book_id):
             messages.success(request, "Your rating was updated.")
         else:
             messages.error(request, "Please select a valid rating.")
+
+    return redirect("book_detail", book_id=book.id)
+
+@login_required
+def add_book_note(request, book_id):
+    book = get_object_or_404(Book, id=book_id, user=request.user)
+
+    if request.method == "POST":
+        form = BookNoteForm(request.POST)
+
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.book = book
+            note.save()
+
+            messages.success(request, "Your note was added successfully.")
+            return redirect("book_detail", book_id=book.id)
+
+        messages.error(request, "Notes require content before they can be saved.")
 
     return redirect("book_detail", book_id=book.id)
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Book
+from .models import Book, BookNote
 
 class BookForm(forms.ModelForm):
     class Meta:
@@ -27,3 +27,29 @@ class RatingForm(forms.ModelForm):
                 ]
             )
         }
+
+class BookNoteForm(forms.ModelForm):
+    class Meta:
+        model = BookNote
+        fields = ["content"]
+        labels = {
+            "content": "Add a note",
+        }
+        widgets = {
+            "content": forms.Textarea(
+                attrs={
+                    "rows": 5,
+                    "placeholder": "Write notes about this book..."
+                }
+            )
+        }
+
+    def clean_content(self):
+        content = self.cleaned_data.get("content", "").strip()
+
+        if not content:
+            raise forms.ValidationError(
+                "Please enter a note."
+            )
+        
+        return content
