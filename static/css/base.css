@@ -53,6 +53,12 @@ body::before {
     z-index: -1;
 }
 
+main {
+    width: min(100% - 2rem, var(--container-width));
+    margin: 0 auto;
+    padding: var(--spacing-lg) 0;
+}
+
 img {
     max-width: 100%;
     display: block;
@@ -120,6 +126,23 @@ select {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+}
+
+/* Headers */
+
+.page-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.page-header h1 {
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.page-header p {
+    color: var(--color-muted);
+    max-width: 720px;
 }
 
 /* Forms */
