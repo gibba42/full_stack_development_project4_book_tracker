@@ -195,3 +195,39 @@ select:focus {
     color: #8a1f1f;
     list-style-position: inside;
 }
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
+.checkbox-group label {
+    margin-bottom: 0;
+}
+
+/* Search bar */
+
+.search-panel {
+    max-width: 760px;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    border: var(--border-width) solid var(--color-border);
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.search-panel h2 {
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
