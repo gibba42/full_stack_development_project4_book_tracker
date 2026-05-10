@@ -108,6 +108,9 @@ select {
 /* Nav bar */
 
 .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     border-bottom: var(--border-width) solid var(--color-border);
     background-color: var(--color-paper);
 }
@@ -178,8 +181,9 @@ select {
 
 .button,
 .button-link,
+.btn,
 .nav-auth button,
-.btn {
+.nav-auth a {
     display: inline-block;
     padding: 0.65rem 1rem;
     border: var(--border-width) solid var(--color-border);
@@ -187,23 +191,21 @@ select {
     color: var(--color-white);
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
 }
 
 .button:hover,
 .button:focus,
 .button-link:hover,
 .button-link:focus,
+.btn:hover,
+.btn:focus,
 .nav-auth button:hover,
 .nav-auth button:focus,
-.btn:hover,
-.btn:focus {
+.nav-auth a:hover,
+.nav-auth a:focus {
     background-color: var(--color-button-hover);
-}
-
-.button-row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
 }
 
 /* Forms */
