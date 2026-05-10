@@ -231,3 +231,48 @@ select:focus {
     flex-direction: column;
     gap: var(--spacing-md);
 }
+
+/* Saved book */
+
+.book-results {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.book-card {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: var(--spacing-md);
+    align-items: start;
+    padding: var(--spacing-md);
+    border: var(--border-width) solid var(--color-border);
+    background-color: rgba(255, 255, 255, 0,35);
+}
+
+.book-cover img,
+.cover-placeholder {
+    width: 140px;
+    min-height: 210px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+}
+
+.cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    text-align: center;
+    color: var(--color-muted);
+    background-color: var(--color-paper-dark);
+}
+
+.book-details h2,
+.book-details h3 {
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-heading);
+}
+
+.book-details p {
+    margin-bottom: 0.35rem;
+}
