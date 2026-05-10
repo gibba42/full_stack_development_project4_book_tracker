@@ -117,7 +117,7 @@ def update_book_rating(request, book_id):
         else:
             messages.error(request, "Please select a valid rating.")
 
-    return redirect("book_detail", book_id.id)
+    return redirect("book_detail", book_id=book.id)
 
 @login_required
 def edit_book(request, book_id):
