@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section>
+<section class="home-hero">
     <h1>Book Tracker</h1>
 
     <p>
@@ -11,16 +11,16 @@
 
     {% if user.is_authenticated %}
         <p>You are logged in as {{ user.username }}.</p>
-        <p>
-            <a href="{% url 'profile' %}">Go to my account</a>
-        </p>
+
+        <div class="hero-actions">
+            <a href="{% url 'profile' %}" class="button-link">Go to my account</a>
+            <a href="{% url 'my_library' %}" class="button-link">View my library</a>
+        </div>
     {% else %}
-        <p>
-            <a href="{% url 'register' %}">Create an account</a>
-        </p>
-        <p>
-            <a href="{% url 'login' %}">Log in</a>
-        </p>
+        <div class="hero-actions">
+            <a href="{% url 'register' %}" class="button-link">Create an account</a>
+            <a href="{% url 'login' %}" class="button-link">Log in</a>
+        </div>
     {% endif %}
 </section>
 {% endblock %}
