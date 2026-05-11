@@ -307,6 +307,162 @@ Manual testing was completed against the user stories defined for this project. 
 | 404 error when rating a book | When a user tries to save a book rating, a 404 error is shown. | The bug was caused by the update_book_rating form not being closed properly. Updated this section so that the form is now correctly actioning. | Resolved |
 | Long notes overflowing | If a user adds a very long note, the text overflows the page and shows a horizontal scroll bar. | Updated the base css so that note cards now text wrap on overflow. | Resolved |
 
+# Deployment
+
+| Step | Location | Description |
+|--------|----------|--------------------------------|
+| Cloning the Repository	| GitHub & IDE |	Copy the repository link from GitHub and clone it in your IDE. |
+| Creating a GitHub Repository	| GitHub |	Set up a new repository for version control. |
+| Installing Django & Dependencies |	IDE |	Install Django, Gunicorn, and required packages. |
+| Creating requirements.txt |	IDE |	Generate a list of dependencies using pip freeze > requirements.txt. |
+| Initializing Django Project |	IDE	| Start the Django project and verify by running the local server. |
+| Updating ALLOWED_HOSTS |	settings.py |	Add required domains for deployment compatibility. |
+| Creating a Django App |	IDE |	Create and register a new Django app. |
+| Creating a Heroku App |	Heroku |	Log in to Heroku and create a new app with a unique name. |
+| Adding Config Vars	| Heroku |	Add DISABLE_COLLECTSTATIC=1, SECRET_KEY, and DATABASE_URL. |
+| Installing Gunicorn	| IDE |	Install Gunicorn as the production WSGI server. |
+| Creating a Procfile	| IDE |	Add web: gunicorn project_name.wsgi to configure deployment. |
+| Connecting GitHub to Heroku |	Heroku |	Link Heroku with GitHub for automatic deployment. |
+| Checking Heroku Resources	| Heroku |	Enable Eco Dynos and remove unnecessary PostgreSQL add-ons. |
+| Creating a PostgreSQL Database |	CI Database Creator |	Generate a PostgreSQL database instance. |
+| Installing Database Packages |	IDE |	Install dj-database-url and psycopg2-binary. |
+| Creating env.py |	IDE |	Store DATABASE_URL and SECRET_KEY locally. |
+| Adding Secret Keys to Config Vars |	Heroku |	Add environment variables for security. |
+| Updating settings.py for DB |	IDE |	Configure database settings for PostgreSQL. |
+| Running Migrations | IDE |	Apply database migrations with python manage.py migrate. |
+| Creating a Superuser |	IDE |	Run python manage.py createsuperuser to set up an admin. |
+| Setting  DEBUG = False |	settings.py	| Disable debug mode before deployment for security. |
+| Deploying to Heroku |	GitHub & Heroku	Commit | changes, push to GitHub, and trigger deployment. |
+| Restarting Heroku |	Heroku |	Use heroku restart to apply changes. |
+
+# Forking
+
+## Forking the Repository
+
+If you'd like to contribute to this project or make changes to your own version, you can **fork** the repository. This creates a copy of the repository under your own GitHub account, where you can make changes freely without affecting the original project.
+
+## Steps to Fork the Repository
+
+### 1. **Go to the GitHub Repository**
+Navigate to the GitHub repository page you want to fork.
+
+### 2. **Click on the Fork Button**
+On the top right of the page, click the **Fork** button. GitHub will create a copy of the repository under your GitHub account.
+
+### 3. **Clone Your Forked Repository**
+Once the repository is forked, you can clone it to your local machine by following these steps:
+
+- Go to your forked repository (it will be at `https://github.com/yourusername/your-repository-name`).
+- Click the **Code** button and copy the repository's HTTPS URL.
+  
+    Example URL:
+    ```
+    https://github.com/yourusername/your-repository-name.git
+    ```
+
+- Open the terminal/command prompt on your local machine.
+- Navigate to the directory where you want to clone the repository.
+- Run the following command:
+
+This will create a local copy of your forked repository.
+
+## Making Changes in Your Fork
+
+1. **Create a New Branch** (for feature work or fixes):
+ - `git checkout -b your-feature-branch`
+
+2. **Make Changes** to the files in the project.
+
+3. **Stage the Changes** to Git:
+ - `git add .`
+
+4. **Commit the Changes**:
+ - `git commit -m "Your commit message"`
+
+5. **Push Your Changes** to GitHub:
+ - `git push origin your-feature-branch`
+
+## Submitting a Pull Request
+
+Once you've made your changes and pushed them to your fork, you can submit a pull request to the original repository:
+
+1. Go to the original repository (the one you forked from).
+2. Click on the **Pull Requests** tab.
+3. Click on the **New Pull Request** button.
+4. Choose your forked repository and the branch you want to merge from.
+5. Write a description of the changes you made and submit the pull request.
+
+The repository owner will review your pull request and decide whether to merge it into the main project.
+
+
+# Making a Local Clone of the Repository
+
+Follow these steps to make a local clone of the repository on your computer.
+
+## Prerequisites
+
+Make sure you have [Git](https://git-scm.com/) installed on your computer. If not, follow the installation instructions based on your operating system:
+
+- **Windows**: [Download Git](https://git-scm.com/download/win) and follow the installation instructions.
+- **macOS**: Install Git via [Homebrew](https://brew.sh/) by running:
+  1. Open Terminal and run the command: `brew install git`
+- **Linux**: Install Git using your package manager. For example, on Ubuntu:
+  1. Open Terminal and run the command: `sudo apt install git`
+
+## Cloning the Repository
+
+### 1. Copy the Repository URL
+- Go to the GitHub repository page you want to clone.
+- Click the **Code** button (usually green) at the top right of the page.
+- Copy the **HTTPS** URL of the repository.
+https://github.com/yourusername/your-repository-name.git
+
+markdown
+Copy
+Edit
+
+### 2. Open the Terminal/Command Prompt
+- **Windows**: Open Command Prompt or PowerShell.
+- **macOS/Linux**: Open the Terminal.
+
+### 3. Navigate to the Desired Directory
+Use the `cd` command to navigate to the folder where you want to clone the repository. For example:
+- `cd /path/to/your/folder`
+
+### 4. Clone the Repository
+Run the following command, replacing `<repository-url>` with the URL you copied earlier:
+- `git clone https://github.com/yourusername/your-repository-name.git`
+
+This will create a new folder with the repository's name and download all the files from GitHub into that folder.
+
+### 5. Enter the Cloned Directory
+Once the clone is complete, navigate into the new directory:
+- `cd your-repository-name`
+
+### 6. Verify the Clone
+To confirm that the repository has been cloned successfully, run the following command:
+- `git status`
+
+This should display the current status of the repository and indicate which branch you are on (e.g., "On branch main").
+
+## Making Changes and Pushing Back to GitHub (Optional)
+
+1. **Create a New Branch** (for feature work or fixes):
+ - `git checkout -b your-feature-branch`
+
+2. **Make Changes** to the files in the project.
+
+3. **Stage the Changes** to Git:
+ - `git add .`
+
+4. **Commit the Changes**:
+ - `git commit -m "Your commit message"`
+
+5. **Push Your Changes** to GitHub:
+ - `git push origin your-feature-branch`
+
+6. **Create a Pull Request** on GitHub to merge your changes back into the main branch.
+
 ## Not Implemented / Future Features
 
 Due to time constraints the following "Could" or "Should" features were not implemented, but should be considered if the project is further developed:

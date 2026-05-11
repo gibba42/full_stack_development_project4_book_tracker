@@ -125,12 +125,21 @@
                     {% endif %}
                 </p>
 
-                <a
-                    href="{% url 'edit_book_note' book.id note.id %}"
-                    class="button-link"
-                >
-                    Edit Note
-                </a>
+                <div class="button-row">
+                    <a
+                        href="{% url 'edit_book_note' book.id note.id %}"
+                        class="button-link"
+                    >
+                        Edit Note
+                    </a>
+
+                    <a
+                        href="{% url 'delete_book_note' book.id note.id %}"
+                        class="button-link"
+                    >
+                        Delete Note
+                    </a>
+                </div>
             </article>
             {% endfor %}
         {% else %}

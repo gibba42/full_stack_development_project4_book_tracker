@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>Delete Note</h1>
+    <p>Please confirm whether you want to delete this note.</p>
+</section>
+
+<section class="delete-confirmation" aria-labelledby="delete-note-heading">
+    <h2 id="delete-note-heading">Confirm deletion</h2>
+
+    <p>
+        Are you sure you want to delete this note for
+        <strong>{{ book.title }}</strong>?
+    </p>
+
+    <article class="note-card">
+        <p class="note-category">
+            <strong>{{ note.get_category_display }}</strong>
+        </p>
+
+        {{ note.content|linebreaks }}
+    </article>
+
+    <p>
+        This action cannot be undone.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="button-row">
+            <button type="submit" class="button">
+                Yes, delete this note
+            </button>
+
+            <a href="{% url 'book_detail' book.id %}" class="button-link">
+                Cancel
+            </a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

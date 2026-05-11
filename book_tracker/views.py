@@ -170,26 +170,21 @@ def edit_book_note(request, book_id, note_id):
     )
 
 @login_required
-def edit_book(request, book_id):
+def delete_book_note(request, book_id, note_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)
+    note = get_object_or_404(BookNote, id=note_id, book=book)
 
     if request.method == "POST":
-        form = BookForm(request.POST, instance=book)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Book updated successfully.")
-            return redirect("book_detail", book_id=book.id)
-
-    else:
-        form = BookForm(instance=book)
+        note.delete()
+        messages.success(request, "Your note was deleted successfully.")
+        return redirect("book_detail", book_id=book.id)
 
     return render(
         request,
-        "book_tracker/book_form.html",
+        "book_tracker/book_note_confirm_delete.html",
         {
-            "form": form,
             "book": book,
+            "note": note,
         }
     )
     

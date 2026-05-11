@@ -7,7 +7,6 @@ urlpatterns = [
     path("add/", views.add_book_to_library, name="add_book_to_library"),
     path('my-library/', views.my_library, name='my_library'),
     path("library/<int:book_id>/", views.book_detail, name="book_detail"),
-    path("library/<int:book_id>/edit/", views.edit_book, name="edit_book"),
     path("library/<int:book_id>/delete/", views.delete_book, name="delete_book"),
     path(
         "library/<int:book_id>/rating/update/",
@@ -23,5 +22,10 @@ urlpatterns = [
     "library/<int:book_id>/notes/<int:note_id>/edit/",
     views.edit_book_note,
     name="edit_book_note"
+    ),
+    path(
+    "library/<int:book_id>/notes/<int:note_id>/delete/",
+    views.delete_book_note,
+    name="delete_book_note"
     ),
 ]
