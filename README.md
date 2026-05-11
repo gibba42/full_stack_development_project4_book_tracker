@@ -380,6 +380,20 @@ Manual testing was completed against the user stories defined for this project. 
 | Epic 4: Notes and Writer Analysis | User Story 4.2: Add Notes to a Book | Categorised notes | 1. Log in as a registered user. <br> 2. Open a saved book detail page. <br> 3. Add notes using different categories, such as General, Themes, Structure, Character Arcs and Personal Reflections. | Notes are saved with the selected category and displayed with the correct category label. | As expected. | Pass |
 | Epic 4: Notes and Writer Analysis | User Story 4.2: Add Notes to a Book | Edit existing note | 1. Log in as a registered user. <br> 2. Open a saved book with an existing note. <br> 3. Click Edit Note. <br> 4. Update the category or content. <br> 5. Save the changes. | The note is updated and the new content is displayed on the book detail page. | As expected. | Pass |
 
+## Validation
+
+### W3C HTML Validation Results
+
+The live Heroku site was used for this test. The test passed with no errors or warnings:
+
+![W3C results](static/images/README/wsc-html-results.png)
+
+### W3C Jigsaw Validation Results
+
+The live Heroku site was used for this test. The test passed with no errors or warnings:
+
+![W3C results](static/images/README/wsc-jigsaw-results.png)
+
 ---
 
 ## Bugs

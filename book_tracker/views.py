@@ -7,6 +7,7 @@ from .forms import BookForm, RatingForm, BookNoteForm
 from .models import Book, BookNote
 from .services import search_open_library
 
+
 def index(request):
     return render(request, "book_tracker/index.html")
 
@@ -80,6 +81,7 @@ def add_book_to_library(request):
 
     return redirect("my_library")
 
+
 @login_required
 def my_library(request):
     books = Book.objects.filter(user=request.user)
@@ -89,6 +91,7 @@ def my_library(request):
         "book_tracker/my_library.html",
         {"books": books}
     )
+
 
 @login_required
 def book_detail(request, book_id):
@@ -107,6 +110,7 @@ def book_detail(request, book_id):
             }
     )
 
+
 @login_required
 def update_book_rating(request, book_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)
@@ -121,6 +125,7 @@ def update_book_rating(request, book_id):
             messages.error(request, "Please select a valid rating.")
 
     return redirect("book_detail", book_id=book.id)
+
 
 @login_required
 def add_book_note(request, book_id):
@@ -140,6 +145,7 @@ def add_book_note(request, book_id):
         messages.error(request, "Notes require content before they can be saved.")
 
     return redirect("book_detail", book_id=book.id)
+
 
 @login_required
 def edit_book_note(request, book_id, note_id):
@@ -169,6 +175,7 @@ def edit_book_note(request, book_id, note_id):
         }
     )
 
+
 @login_required
 def delete_book_note(request, book_id, note_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)
@@ -187,7 +194,8 @@ def delete_book_note(request, book_id, note_id):
             "note": note,
         }
     )
-    
+
+
 @login_required
 def delete_book(request, book_id):
     book = get_object_or_404(Book, id=book_id, user=request.user)

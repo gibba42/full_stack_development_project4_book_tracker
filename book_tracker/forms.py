@@ -1,6 +1,7 @@
 from django import forms
 from .models import Book, BookNote
 
+
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
@@ -10,6 +11,7 @@ class BookForm(forms.ModelForm):
             "first_publish_year",
             "isbn",
         ]
+
 
 class RatingForm(forms.ModelForm):
     class Meta:
@@ -27,6 +29,7 @@ class RatingForm(forms.ModelForm):
                 ]
             )
         }
+
 
 class BookNoteForm(forms.ModelForm):
     class Meta:

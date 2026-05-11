@@ -19,13 +19,13 @@ urlpatterns = [
         name="add_book_note"
     ),
     path(
-    "library/<int:book_id>/notes/<int:note_id>/edit/",
-    views.edit_book_note,
-    name="edit_book_note"
+        "library/<int:book_id>/notes/<int:note_id>/edit/",
+        views.edit_book_note,
+        name="edit_book_note"
     ),
     path(
-    "library/<int:book_id>/notes/<int:note_id>/delete/",
-    views.delete_book_note,
-    name="delete_book_note"
+        "library/<int:book_id>/notes/<int:note_id>/delete/",
+        views.delete_book_note,
+        name="delete_book_note"
     ),
 ]
