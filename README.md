@@ -117,13 +117,55 @@ More detailed User Stories are captured in Github issues, but at a high-level th
 
 The wireframes for this project were developed using Figma. 
 
+## Features
+
 ### Home page
+
+First time users are brought to the home page where they have the options to sign-up, or log in if they already have an account.
+
+![Home page](static/images/README/home-page-example.png)
 
 ### Registration page
 
+![Registration page](static/images/README/create-account-example.png)
+
 ### Login page
 
+![Log in page](static/images/README/login-example.png)
+
+### My account page
+
+When a user logs in, they are taken to the "My account" page. This page shows a user their user name and email. 
+
+![My account page](static/images/README/my-account-example.png)
+
+###
+
+Any user can search for a book. This feature uses the Open Library API to match search results to a comprehensive list of published books. 
+
+![Book search page](static/images/README/search-book-example-1.png)
+
+If a user is logged in, they are given the option to save books to their library:
+
+![Book search results, user logged in](static/images/README/search-book-example-2.png)
+
+If a user is not logged in, they are shown a message saying they can log in to save books:
+
+![Book search results, user not logged in](static/images/README/search-book-example-3.png)
+
 ### My Library page
+
+![My Library page](static/images/README/my-library-example.png)
+
+### Book details and notes
+
+From the My Library page, users can see more details about books they have saved and add a rating:
+
+![Book details page](static/images/README/book-details-example-1.png)
+
+They can also add notes to books, and organise them by different categories:
+
+![Book details page, notes section](static/images/README/book-details-example-2.png)
 
 ## Data Model
 
