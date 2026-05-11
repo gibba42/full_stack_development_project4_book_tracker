@@ -31,15 +31,17 @@ class RatingForm(forms.ModelForm):
 class BookNoteForm(forms.ModelForm):
     class Meta:
         model = BookNote
-        fields = ["content"]
+        fields = ["category", "content"]
         labels = {
-            "content": "Add a note",
+            "category": "Note type",
+            "content": "Note",
         }
         widgets = {
+            "category": forms.Select(),
             "content": forms.Textarea(
                 attrs={
                     "rows": 5,
-                    "placeholder": "Write notes about this book..."
+                    "placeholder": "Write your thoughts about this book..."
                 }
             )
         }
@@ -49,7 +51,7 @@ class BookNoteForm(forms.ModelForm):
 
         if not content:
             raise forms.ValidationError(
-                "Please enter a note."
+                "Notes require content before they can be saved."
             )
-        
+
         return content

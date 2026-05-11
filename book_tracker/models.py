@@ -35,16 +35,30 @@ class Book(models.Model):
         return f"{self.title} by {self.author}"
     
 class BookNote(models.Model):
+    NOTE_CATEGORY_CHOICES = [
+        ("general", "General"),
+        ("themes", "Themes"),
+        ("structure", "Structure"),
+        ("character_arcs", "Character Arcs"),
+        ("personal_reflections", "Personal Reflections"),
+    ]
+
     book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
         related_name="notes"
     )
+    category = models.CharField(
+        max_length=30,
+        choices=NOTE_CATEGORY_CHOICES,
+        default="general"
+    )
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-created_on"]
 
     def __str__(self):
-        return f"Note for {self.book.title}"
+        return f"{self.get_category_display()} note for {self.book.title}"

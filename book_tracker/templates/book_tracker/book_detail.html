@@ -112,15 +112,34 @@
     <div class="notes-list">
         {% if notes %}
             {% for note in notes %}
-                <article class="note-card">
-                    <p>{{ note.content|linebreaks }}</p>
-                    <p class="note-date">
-                        Added on {{ note.created_on|date:"d M Y H:i" }}
-                    </p>
-                </article>
+            <article class="note-card">
+                <p class="note-category">
+                    <strong>{{ note.get_category_display }}</strong>
+                </p>
+
+                {{ note.content|linebreaks }}
+
+                <p class="note-date">
+                    Added on {{ note.created_on|date:"d M Y H:i" }}
+
+                    {% if note.updated_on != note.created_on %}
+                        <br>
+                        Updated on {{ note.updated_on|date:"d M Y H:i" }}
+                    {% endif %}
+                </p>
+
+                <a
+                    href="{% url 'edit_book_note' book.id note.id %}"
+                    class="button-link"
+                >
+                    Edit Note
+                </a>
+            </article>
             {% endfor %}
         {% else %}
-            <p>No notes have been added for this book yet.</p>
+        <p>
+            No notes have been added for this book yet.
+        </p>
         {% endif %}
     </div>
 </section>

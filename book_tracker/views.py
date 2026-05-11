@@ -4,7 +4,7 @@ from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import BookForm, RatingForm, BookNoteForm
 
-from .models import Book
+from .models import Book, BookNote
 from .services import search_open_library
 
 def index(request):
@@ -140,6 +140,34 @@ def add_book_note(request, book_id):
         messages.error(request, "Notes require content before they can be saved.")
 
     return redirect("book_detail", book_id=book.id)
+
+@login_required
+def edit_book_note(request, book_id, note_id):
+    book = get_object_or_404(Book, id=book_id, user=request.user)
+    note = get_object_or_404(BookNote, id=note_id, book=book)
+
+    if request.method == "POST":
+        form = BookNoteForm(request.POST, instance=note)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your note was updated successfully.")
+            return redirect("book_detail", book_id=book.id)
+
+        messages.error(request, "Notes require content before they can be saved.")
+
+    else:
+        form = BookNoteForm(instance=note)
+
+    return render(
+        request,
+        "book_tracker/book_note_form.html",
+        {
+            "book": book,
+            "note": note,
+            "form": form,
+        }
+    )
 
 @login_required
 def edit_book(request, book_id):

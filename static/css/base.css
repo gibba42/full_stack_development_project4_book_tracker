@@ -340,6 +340,18 @@ select:focus {
     margin-bottom: 0.35rem;
 }
 
+/* Book notes */
+
+.note-category {
+    margin-bottom: 0.5rem;
+    color: #333333;
+}
+
+.note-card .button-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+}
+
 /* Mobile responsiveness */
 
 @media (max-width: 800px) {

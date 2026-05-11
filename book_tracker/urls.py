@@ -19,4 +19,9 @@ urlpatterns = [
         views.add_book_note,
         name="add_book_note"
     ),
+    path(
+    "library/<int:book_id>/notes/<int:note_id>/edit/",
+    views.edit_book_note,
+    name="edit_book_note"
+    ),
 ]
