@@ -1,6 +1,6 @@
 # Book Tracker
 
-ADD MOCKUP IMAGE HERE
+![Book Tracker mockup](static/images/README/book-tracker-mockup.png)
 
 Book Tracker is a full-stack reading journal and book analysis application designed for readers, students and aspiring authors.
 
@@ -10,7 +10,7 @@ This project was built as a data-driven Django application using a PostgreSQL da
 
 ## Live Site
 
-- Live site: ADD HEROKU LINK HERE
+- Live site: [Heroku Link](https://project-4-book-tracker-101a44e130e3.herokuapp.com)
 - Repository: [GitHub Repository](https://github.com/gibba42/full_stack_development_project4_book_tracker)
 
 ## Technologies Used
@@ -369,7 +369,7 @@ Manual testing was completed against the user stories defined for this project. 
 | Epic 3: Reading Log and Personal Library | User Story 3.1: View My Library | Empty library state | 1. Log in as a user with no saved books. <br> 2. Navigate to My Library. | An empty-state message is displayed explaining that the user has not added any books yet. | As expected. | Pass |
 | Epic 3: Reading Log and Personal Library | User Story 3.2: Add a Book to My Library | Book added successfully | 1. Log in as a registered user. <br> 2. Search for a book. <br> 3. Click Add to My Library. <br> 4. Navigate to My Library. | A new book record is created and appears in My Library. | As expected. | Pass |
 | Epic 3: Reading Log and Personal Library | User Story 3.2: Add a Book to My Library | Duplicate book is not added | 1. Log in as a registered user. <br> 2. Add a book to My Library. <br> 3. Search for the same book again. <br> 4. Click Add to My Library again. | A duplicate record is not created. A message informs the user that the book is already in their library. | As expected. | Pass |
-| Epic 3: Reading Log and Personal Library | User Story 3.3: Edit a Reading Log | Successful edit | 1. Log in as a registered user. <br> 2. Open a saved book from My Library. <br> 3. Edit the saved book details or rating. <br> 4. Submit the form. | The updated information is saved. The user receives confirmation and the updated information is shown in the interface. | As expected. | Pass / Review Needed |
+| Epic 3: Reading Log and Personal Library | User Story 3.3: Edit a Reading Log | Successful edit | 1. Log in as a registered user. <br> 2. Open a saved book from My Library. <br> 3. Edit the saved book details or rating. <br> 4. Submit the form. | The updated information is saved. The user receives confirmation and the updated information is shown in the interface. | As expected. | Pass |
 | Epic 3: Reading Log and Personal Library | User Story 3.4: Delete a Book Log | Confirm deletion | 1. Log in as a registered user. <br> 2. Navigate to My Library. <br> 3. Open a saved book. <br> 4. Click Delete Book. | A confirmation page is displayed asking the user to confirm whether they want to delete the book. | As expected. | Pass |
 | Epic 3: Reading Log and Personal Library | User Story 3.4: Delete a Book Log | Successful deletion | 1. Log in as a registered user. <br> 2. Open a saved book. <br> 3. Click Delete Book. <br> 4. Confirm deletion. | The book is removed from My Library. A success message confirms that the book was deleted. | As expected. | Pass |
 | Epic 3: Reading Log and Personal Library | User Story 3.4: Delete a Book Log | Cancel deletion | 1. Log in as a registered user. <br> 2. Open a saved book. <br> 3. Click Delete Book. <br> 4. Click Cancel on the confirmation page. | The book is not deleted. The user is returned to the book detail page. | As expected. | Pass |
@@ -379,6 +379,8 @@ Manual testing was completed against the user stories defined for this project. 
 | Epic 4: Notes and Writer Analysis | User Story 4.2: Add Notes to a Book | Empty note | 1. Log in as a registered user. <br> 2. Open a saved book detail page. <br> 3. Select a note category. <br> 4. Leave the note content empty. <br> 5. Submit the form. | The note is not saved. A message is displayed explaining that notes require content before they can be saved. | As expected. | Pass |
 | Epic 4: Notes and Writer Analysis | User Story 4.2: Add Notes to a Book | Categorised notes | 1. Log in as a registered user. <br> 2. Open a saved book detail page. <br> 3. Add notes using different categories, such as General, Themes, Structure, Character Arcs and Personal Reflections. | Notes are saved with the selected category and displayed with the correct category label. | As expected. | Pass |
 | Epic 4: Notes and Writer Analysis | User Story 4.2: Add Notes to a Book | Edit existing note | 1. Log in as a registered user. <br> 2. Open a saved book with an existing note. <br> 3. Click Edit Note. <br> 4. Update the category or content. <br> 5. Save the changes. | The note is updated and the new content is displayed on the book detail page. | As expected. | Pass |
+| Epic 4: Notes and Writer Analysis | User Story 4.3: Delete Notes from a Book | Cancel note deletion | 1. Log in as a registered user. <br> 2. Open a saved book with an existing note. <br> 3. Click Delete Note. <br> 4. Click Cancel. | The note is not deleted and the user is returned to the book detail page. | As expected. | Pass |
+| Epic 4: Notes and Writer Analysis | User Story 4.3: Delete Notes from a Book | Successful note deletion | 1. Log in as a registered user. <br> 2. Open a saved book with an existing note. <br> 3. Click Delete Note. <br> 4. Confirm deletion. | The note is deleted. The user is returned to the book detail page and a success message is displayed. | As expected. | Pass |
 
 ## Validation
 
@@ -439,6 +441,48 @@ As shown above, elements scale appropriately at different resolutions.
 ---
 
 ## Deployment
+
+## Deployment
+
+The project was deployed to Heroku using the following process.
+
+### Local Preparation
+
+Before deployment, the following files were checked and updated:
+
+- `requirements.txt` was updated using `pip freeze > requirements.txt`
+- `Procfile` was added with the command needed to run the application
+- `DEBUG` was set to `False`
+- `env.py` was added to `.gitignore`
+- `SECRET_KEY` was stored as an environment variable
+- `DATABASE_URL` was stored as an environment variable
+- WhiteNoise was configured to serve static files in production
+- `ALLOWED_HOSTS` was updated to allow the Heroku domain
+
+### Heroku Deployment Steps
+
+1. Log in to Heroku.
+2. Create a new Heroku app.
+3. Add a PostgreSQL database to the app.
+4. Open the Heroku app settings.
+5. Add the following Config Vars:
+   - `SECRET_KEY`
+   - `DATABASE_URL`
+6. Connect the Heroku app to the GitHub repository.
+7. Select the `main` branch for deployment.
+8. Deploy the branch.
+9. Open the Heroku terminal or use the CLI to run migrations 
+
+---
+
+## Security
+
+The final deployed version of the site uses the following security features:
+
+ - `SECRET_KEY` is not hardcoded in the repository. It is stored in `env.py` which is included in `.gitignore` so that the key is not pushed to the repository.
+ - `DEBUG` is set to `False` in `settings.py`
+ - User data is protected using Django's built-in authentication.
+ - Sensitive pages are protected using `@login_required`
 
 ## Not Implemented / Future Features
 
