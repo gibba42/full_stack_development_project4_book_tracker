@@ -23,8 +23,11 @@
 
             <ul class="nav-links">
                 <li><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-                <li><a class="nav-link" href="{% url 'book_search' %}">Seach Books</a></li>
-                <li><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                <li><a class="nav-link" href="{% url 'book_search' %}">Search Books</a></li>
+
+                {% if not user.is_authenticated %}
+                    <li><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                {% endif %}
             </ul>
 
             <div class="nav-auth">

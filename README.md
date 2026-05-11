@@ -16,8 +16,7 @@ This project was built as a data-driven Django application using a PostgreSQL da
 ## Technologies Used
 
 - HTML5
-- CSS3
-- JavaScript
+- CSS
 - Python
 - Django
 - PostgreSQL
@@ -28,39 +27,6 @@ This project was built as a data-driven Django application using a PostgreSQL da
 - Figma
 
 ## Table of Contents
-
-1. [Project Purpose](#project-purpose)
-   - [Target Audience](#target-audience)
-   - [Project Goals](#project-goals)
-   - [User Stories](#user-stories)
-2. [Agile Planning](#agile-planning)
-   - [Epics](#epics)
-   - [User Stories and Acceptance Criteria](#user-stories-and-acceptance-criteria)
-   - [MoSCoW Prioritisation](#moscow-prioritisation)
-3. [UX Design](#ux-design)
-   - [Design Goals](#design-goals)
-   - [Wireframes](#wireframes)
-   - [Colour Scheme](#colour-scheme)
-   - [Typography](#typography)
-4. [Features](#features)
-5. [Data Model](#data-model)
-   - [Entity Relationship Diagram](#entity-relationship-diagram)
-   - [User Model](#user-model)
-   - [Book Model](#book-model)
-   - [Book Note Model](#book-note-model)
-6. [Technologies Used](#technologies-used)
-7. [Testing](#testing)
-   - [Manual Testing](#manual-testing)
-   - [User Story Testing](#user-story-testing)
-   - [Python Testing](#python-testing)
-   - [JavaScript Testing](#javascript-testing)
-   - [Validator Testing](#validator-testing)
-   - [Responsiveness Testing](#responsiveness-testing)
-8. [Bugs](#bugs)
-9. [Deployment](#deployment)
-10. [Security Features](#security-features)
-11. [Credits](#credits)
-12. [Future Improvements](#future-improvements)
   
 ## Project Purpose
 
@@ -98,6 +64,8 @@ The main goals of this project are to:
 - Use Agile planning to manage the development process
 - Deploy the finished application to a cloud platform
 
+---
+
 ## Agile Planning
 
 ### User Stories
@@ -110,6 +78,38 @@ More detailed User Stories are captured in Github issues, but at a high-level th
 - As a user, I want to write notes so that I can analyse books
 - As a user, I want to edit or delete entries so that I can manage my data
 - As a user, I want to register an account so that my data is secure
+
+### Github Project
+
+The Epics, User Stories, and associated tasks were captured and managed in Github Projects:
+
+![Github project board](static/images/README/github-project-board.png)
+
+The board was used to track work through:
+
+| Stage | Purpose |
+|-------|---------|
+| To Do | Work captured in the backlog but not started. |
+| In Progress | Work currently in development. |
+| Done | Completed work. |
+| Tested | Completed work that has successfully passed tests against its acceptance criteria. |
+
+**Note:** Epics do not progress past `Done` because their associated user stories capture their testing requirements. An Epic was considered `Done` when all associated "Must Have" user stories were tested. 
+
+Each user story that moved out of `To Do` was further broken down into development tasks. These were tracked within the associated user stories. 
+
+### MoSCoW Prioritisation
+
+MoSCoW prioritisation was used to decide which features were essential for the minimum viable product and which could be deferred.
+
+| Priority | Description | User Stories |
+|----------|-------------|--------------|
+| Must Have | Essential features required for the application to meet its core purpose. | Registration, login, logout, restricted access, book search, API error handling, saving books, viewing My Library, editing records, deleting records, adding notes, editing notes, deleting notes |
+| Should Have | Useful features that would improve the application but were not essential for the MVP. | Editing profile details |
+| Could Have | Desirable stretch features that could be added if time allowed. | Password reset, reading statistics, advanced filtering |
+| Won't Have This Time | Features intentionally deferred from the final submitted version. | Social features, public book reviews, sharing libraries, advanced analytics |
+
+---
 
 ## UX Design
 
@@ -141,6 +141,8 @@ Due to time constraints and for ease of development, the final pages differ slig
 
  The view was implemented as a vertical stack for ease, and to better support mobile responsiveness. 
 
+ ---
+
 ## Features
 
 ### Home page
@@ -163,7 +165,7 @@ When a user logs in, they are taken to the "My account" page. This page shows a 
 
 ![My account page](static/images/README/my-account-example.png)
 
-###
+### Book search
 
 Any user can search for a book. This feature uses the Open Library API to match search results to a comprehensive list of published books. 
 
@@ -193,70 +195,151 @@ They can also add notes to books, and organise them by different categories:
 
 ![Book details page, notes section](static/images/README/book-details-example-2.png)
 
+---
+
 ## Data Model
 
-Book Tracker uses a relational database to store user-owned book records. The application uses Django’s built-in `User` model for authentication and custom models to store books, ratings and notes.
+Book Tracker uses a relational database to store user-owned book records and notes. The application uses Django's built-in `User` model for authentication, with two custom models: `Book` and `BookNote`.
 
-The data model is designed around the core purpose of the application: allowing each registered user to build and manage their own personal reading library.
-
-Each saved book belongs to one user. This ensures that users can only view, edit and delete their own saved books.
+Each saved book belongs to one user. Each note belongs to one saved book. This creates a clear relationship between users, books and analysis notes.
 
 ### Entity Relationship Diagram
 
-ADD ERD HERE
+ADD ERD IMAGE HERE
 
-The database contains the following main relationships:
+### Data Model Overview
 
-- A `User` can have many saved `Book` records.
-- Each `Book` record belongs to one `User`.
-- Each saved `Book` stores information retrieved from the Open Library API, along with user-generated data such as ratings and notes.
+| Model | Purpose |
+|-------|---------|
+| User | Django's built-in authentication model. Used to register, authenticate and identify each user. |
+| Book | Stores a book saved by a user to their personal library. |
+| BookNote | Stores structured notes linked to a saved book. |
 
-### Database Schema
+### Model Relationships
 
-### User Model
+| Relationship | Type | Description |
+|--------------|------|-------------|
+| User to Book | One-to-many | One user can save many books. Each saved book belongs to one user. |
+| Book to BookNote | One-to-many | One book can have many notes. Each note belongs to one book. |
 
-This project uses Django’s built-in `User` model.
+The relationship structure ensures that users can only access and manage their own saved books and notes.
+
+---
+
+## User Model
+
+This project uses Django's built-in `User` model. The `User` model is provided by Django's authentication system and is used for account registration, login, logout and user ownership of saved data.
+
+### Purpose
 
 The `User` model is used to:
 
 - Register new users
-- Authenticate login and logout
+- Authenticate users during login
+- Identify the currently logged-in user
 - Link saved books to the correct user
-- Restrict users so they can only access their own saved book records
+- Restrict access to user-owned records
+
+### Key Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
 | id | AutoField | Primary key for the user |
-| username | CharField | Unique username used to log in |
+| username | CharField | Unique username used for login |
 | password | CharField | Hashed password managed by Django |
-| email | EmailField | Optional user email address |
+| email | EmailField | User email address |
 | first_name | CharField | Optional first name |
 | last_name | CharField | Optional last name |
-| is_active | BooleanField | Identifies whether the user account is active |
+| is_active | BooleanField | Identifies whether the account is active |
+| is_staff | BooleanField | Identifies whether the user can access the admin site |
+| is_superuser | BooleanField | Identifies whether the user has all permissions |
 | date_joined | DateTimeField | Date and time the user account was created |
 
-### Book Model
+---
 
-The `Book` model stores books saved by users to their personal library.
+## Book Model
+
+The `Book` model stores books that users save to their personal library.
+
+Each `Book` record belongs to one logged-in user. This ensures that users can build their own private reading library and cannot access another user's saved books.
+
+### Purpose
+
+The `Book` model is used to:
+
+- Store books selected from the Open Library API
+- Link saved books to a specific user
+- Store useful book metadata, such as title, author, publication year and ISBN
+- Store the user's personal rating
+- Prevent the same user from saving the same Open Library book more than once
+
+### Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
 | id | AutoField | Primary key for the saved book record |
-| user | ForeignKey | Links the saved book to the logged-in user |
+| user | ForeignKey to User | Links the saved book to the logged-in user |
+| open_library_key | CharField | Stores the unique Open Library key for the book |
 | title | CharField | Stores the title of the book |
-| author | CharField | Stores the author of the book |
-| open_library_key | CharField | Stores the unique Open Library identifier for the book |
-| cover_url | URLField | Stores the URL for the book cover image, where available |
-| rating | IntegerField | Stores the user's rating for the book |
-| notes | TextField | Stores the user's general notes about the book |
-| created_at | DateTimeField | Records when the book was saved |
-| updated_at | DateTimeField | Records when the book record was last updated |
+| author | CharField | Stores the author name or names |
+| first_publish_year | IntegerField | Stores the first year the book was published, where available |
+| cover_id | IntegerField | Stores the Open Library cover ID, where available |
+| isbn | CharField | Stores the first returned ISBN, where available |
+| added_on | DateTimeField | Automatically records when the book was added to the user's library |
+| rating | PositiveSmallIntegerField | Stores the user's rating from 1 to 5 |
 
-### Model Relationship
+### Validation
 
-The relationship between `User` and `Book` is a one-to-many relationship.
+The `rating` field uses Django validators to ensure that users can only enter a value between 1 and 5.
 
-One user can save many books, but each saved book belongs to one user.
+| Validator | Purpose |
+|-----------|---------|
+| MinValueValidator(1) | Prevents ratings below 1 |
+| MaxValueValidator(5) | Prevents ratings above 5 |
+
+### Duplicate Prevention
+
+The `Book` model uses a uniqueness rule to prevent the same user from saving the same Open Library book more than once.
+
+## BookNote Model
+
+The `BookNote` model stores notes linked to a saved book.
+
+This model supports the main purpose of the application: helping users analyse books from a reader's or writer's perspective.
+
+### Purpose
+
+The `BookNote` model is used to:
+
+- Store notes against saved books
+- Categorise notes by type
+- Allow users to record analysis of themes, structure, character arcs and personal reflections
+- Track when notes were created and updated
+
+### Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | AutoField | Primary key for the note |
+| book | ForeignKey to Book | Links the note to a saved book |
+| category | CharField | Stores the note category selected by the user |
+| content | TextField | Stores the user's note content |
+| created_on | DateTimeField | Automatically records when the note was created |
+| updated_on | DateTimeField | Automatically records when the note was last updated |
+
+### Note Categories
+
+The note category field uses predefined choices. This helps keep notes structured and supports the writer-analysis purpose of the application.
+
+| Stored Value | Display Value | Purpose |
+|--------------|---------------|---------|
+| general | General | General notes about the book |
+| themes | Themes | Notes about key themes and ideas |
+| structure | Structure | Notes about plot, pacing and story structure |
+| character_arcs | Character Arcs | Notes about character development |
+| personal_reflections | Personal Reflections | Personal reactions, opinions and observations |
+
+---
 
 ## Testing
 
@@ -297,6 +380,8 @@ Manual testing was completed against the user stories defined for this project. 
 | Epic 4: Notes and Writer Analysis | User Story 4.2: Add Notes to a Book | Categorised notes | 1. Log in as a registered user. <br> 2. Open a saved book detail page. <br> 3. Add notes using different categories, such as General, Themes, Structure, Character Arcs and Personal Reflections. | Notes are saved with the selected category and displayed with the correct category label. | As expected. | Pass |
 | Epic 4: Notes and Writer Analysis | User Story 4.2: Add Notes to a Book | Edit existing note | 1. Log in as a registered user. <br> 2. Open a saved book with an existing note. <br> 3. Click Edit Note. <br> 4. Update the category or content. <br> 5. Save the changes. | The note is updated and the new content is displayed on the book detail page. | As expected. | Pass |
 
+---
+
 ## Bugs
 
 | Title | Description | Fix | Status |
@@ -307,161 +392,9 @@ Manual testing was completed against the user stories defined for this project. 
 | 404 error when rating a book | When a user tries to save a book rating, a 404 error is shown. | The bug was caused by the update_book_rating form not being closed properly. Updated this section so that the form is now correctly actioning. | Resolved |
 | Long notes overflowing | If a user adds a very long note, the text overflows the page and shows a horizontal scroll bar. | Updated the base css so that note cards now text wrap on overflow. | Resolved |
 
-# Deployment
+---
 
-| Step | Location | Description |
-|--------|----------|--------------------------------|
-| Cloning the Repository	| GitHub & IDE |	Copy the repository link from GitHub and clone it in your IDE. |
-| Creating a GitHub Repository	| GitHub |	Set up a new repository for version control. |
-| Installing Django & Dependencies |	IDE |	Install Django, Gunicorn, and required packages. |
-| Creating requirements.txt |	IDE |	Generate a list of dependencies using pip freeze > requirements.txt. |
-| Initializing Django Project |	IDE	| Start the Django project and verify by running the local server. |
-| Updating ALLOWED_HOSTS |	settings.py |	Add required domains for deployment compatibility. |
-| Creating a Django App |	IDE |	Create and register a new Django app. |
-| Creating a Heroku App |	Heroku |	Log in to Heroku and create a new app with a unique name. |
-| Adding Config Vars	| Heroku |	Add DISABLE_COLLECTSTATIC=1, SECRET_KEY, and DATABASE_URL. |
-| Installing Gunicorn	| IDE |	Install Gunicorn as the production WSGI server. |
-| Creating a Procfile	| IDE |	Add web: gunicorn project_name.wsgi to configure deployment. |
-| Connecting GitHub to Heroku |	Heroku |	Link Heroku with GitHub for automatic deployment. |
-| Checking Heroku Resources	| Heroku |	Enable Eco Dynos and remove unnecessary PostgreSQL add-ons. |
-| Creating a PostgreSQL Database |	CI Database Creator |	Generate a PostgreSQL database instance. |
-| Installing Database Packages |	IDE |	Install dj-database-url and psycopg2-binary. |
-| Creating env.py |	IDE |	Store DATABASE_URL and SECRET_KEY locally. |
-| Adding Secret Keys to Config Vars |	Heroku |	Add environment variables for security. |
-| Updating settings.py for DB |	IDE |	Configure database settings for PostgreSQL. |
-| Running Migrations | IDE |	Apply database migrations with python manage.py migrate. |
-| Creating a Superuser |	IDE |	Run python manage.py createsuperuser to set up an admin. |
-| Setting  DEBUG = False |	settings.py	| Disable debug mode before deployment for security. |
-| Deploying to Heroku |	GitHub & Heroku	Commit | changes, push to GitHub, and trigger deployment. |
-| Restarting Heroku |	Heroku |	Use heroku restart to apply changes. |
-
-# Forking
-
-## Forking the Repository
-
-If you'd like to contribute to this project or make changes to your own version, you can **fork** the repository. This creates a copy of the repository under your own GitHub account, where you can make changes freely without affecting the original project.
-
-## Steps to Fork the Repository
-
-### 1. **Go to the GitHub Repository**
-Navigate to the GitHub repository page you want to fork.
-
-### 2. **Click on the Fork Button**
-On the top right of the page, click the **Fork** button. GitHub will create a copy of the repository under your GitHub account.
-
-### 3. **Clone Your Forked Repository**
-Once the repository is forked, you can clone it to your local machine by following these steps:
-
-- Go to your forked repository (it will be at `https://github.com/yourusername/your-repository-name`).
-- Click the **Code** button and copy the repository's HTTPS URL.
-  
-    Example URL:
-    ```
-    https://github.com/yourusername/your-repository-name.git
-    ```
-
-- Open the terminal/command prompt on your local machine.
-- Navigate to the directory where you want to clone the repository.
-- Run the following command:
-
-This will create a local copy of your forked repository.
-
-## Making Changes in Your Fork
-
-1. **Create a New Branch** (for feature work or fixes):
- - `git checkout -b your-feature-branch`
-
-2. **Make Changes** to the files in the project.
-
-3. **Stage the Changes** to Git:
- - `git add .`
-
-4. **Commit the Changes**:
- - `git commit -m "Your commit message"`
-
-5. **Push Your Changes** to GitHub:
- - `git push origin your-feature-branch`
-
-## Submitting a Pull Request
-
-Once you've made your changes and pushed them to your fork, you can submit a pull request to the original repository:
-
-1. Go to the original repository (the one you forked from).
-2. Click on the **Pull Requests** tab.
-3. Click on the **New Pull Request** button.
-4. Choose your forked repository and the branch you want to merge from.
-5. Write a description of the changes you made and submit the pull request.
-
-The repository owner will review your pull request and decide whether to merge it into the main project.
-
-
-# Making a Local Clone of the Repository
-
-Follow these steps to make a local clone of the repository on your computer.
-
-## Prerequisites
-
-Make sure you have [Git](https://git-scm.com/) installed on your computer. If not, follow the installation instructions based on your operating system:
-
-- **Windows**: [Download Git](https://git-scm.com/download/win) and follow the installation instructions.
-- **macOS**: Install Git via [Homebrew](https://brew.sh/) by running:
-  1. Open Terminal and run the command: `brew install git`
-- **Linux**: Install Git using your package manager. For example, on Ubuntu:
-  1. Open Terminal and run the command: `sudo apt install git`
-
-## Cloning the Repository
-
-### 1. Copy the Repository URL
-- Go to the GitHub repository page you want to clone.
-- Click the **Code** button (usually green) at the top right of the page.
-- Copy the **HTTPS** URL of the repository.
-https://github.com/yourusername/your-repository-name.git
-
-markdown
-Copy
-Edit
-
-### 2. Open the Terminal/Command Prompt
-- **Windows**: Open Command Prompt or PowerShell.
-- **macOS/Linux**: Open the Terminal.
-
-### 3. Navigate to the Desired Directory
-Use the `cd` command to navigate to the folder where you want to clone the repository. For example:
-- `cd /path/to/your/folder`
-
-### 4. Clone the Repository
-Run the following command, replacing `<repository-url>` with the URL you copied earlier:
-- `git clone https://github.com/yourusername/your-repository-name.git`
-
-This will create a new folder with the repository's name and download all the files from GitHub into that folder.
-
-### 5. Enter the Cloned Directory
-Once the clone is complete, navigate into the new directory:
-- `cd your-repository-name`
-
-### 6. Verify the Clone
-To confirm that the repository has been cloned successfully, run the following command:
-- `git status`
-
-This should display the current status of the repository and indicate which branch you are on (e.g., "On branch main").
-
-## Making Changes and Pushing Back to GitHub (Optional)
-
-1. **Create a New Branch** (for feature work or fixes):
- - `git checkout -b your-feature-branch`
-
-2. **Make Changes** to the files in the project.
-
-3. **Stage the Changes** to Git:
- - `git add .`
-
-4. **Commit the Changes**:
- - `git commit -m "Your commit message"`
-
-5. **Push Your Changes** to GitHub:
- - `git push origin your-feature-branch`
-
-6. **Create a Pull Request** on GitHub to merge your changes back into the main branch.
+## Deployment
 
 ## Not Implemented / Future Features
 
@@ -470,6 +403,8 @@ Due to time constraints the following "Could" or "Should" features were not impl
  - Edit account details. This feature was not implemented, which is why users are not able to navigate to the "My account" page after logging in. It was decided that it would be confusing for users to have access to a page with no working features. 
  - Reset password. This feature was not implemented, but would be a signficant improvement to the user experience. This would be a priority improvement. 
  - Reading statistics. These would be an interesting feature for users, but do not add significant value and as such were the last item in the backlog.
+
+ ---
 
 ## Tutorials and guides used
 
