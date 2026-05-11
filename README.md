@@ -115,7 +115,31 @@ More detailed User Stories are captured in Github issues, but at a high-level th
 
 ### Wireframes
 
-The wireframes for this project were developed using Figma. 
+The wireframes for this project were developed using Figma.
+
+Due to time constraints and for ease of development, the final pages differ slightly from the wireframes. 
+
+ - Home page:
+
+ ![Home page wireframe, desktop](static/images/README/home-page-wireframe-desktop.png)
+
+ ![Home page wireframe, mobile](static/images/README/home-page-wireframe-mobile.png)
+
+ - Create account / sign-in page:
+
+ ![Create account wireframe, desktop](static/images/README/create-account-wireframe-desktop.png)
+
+ ![Create account wireframe, mobile](static/images/README/create-account-wireframe-mobile.png)
+
+ These were split into two separate pages in development for ease.
+
+ - My Library page:
+
+ ![My Library wireframe, desktop](static/images/README/my-library-wireframe-desktop.png)
+
+ ![My Library wireframe, mobile](static/images/README/my-library-wireframe-mobile.png)
+
+ The view was implemented as a vertical stack for ease, and to better support mobile responsiveness. 
 
 ## Features
 
@@ -283,7 +307,7 @@ Manual testing was completed against the user stories defined for this project. 
 | 404 error when rating a book | When a user tries to save a book rating, a 404 error is shown. | The bug was caused by the update_book_rating form not being closed properly. Updated this section so that the form is now correctly actioning. | Resolved |
 | Long notes overflowing | If a user adds a very long note, the text overflows the page and shows a horizontal scroll bar. | Updated the base css so that note cards now text wrap on overflow. | Resolved |
 
-## Future Features
+## Not Implemented / Future Features
 
 Due to time constraints the following "Could" or "Should" features were not implemented, but should be considered if the project is further developed:
 
