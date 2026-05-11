@@ -205,7 +205,7 @@ Each saved book belongs to one user. Each note belongs to one saved book. This c
 
 ### Entity Relationship Diagram
 
-ADD ERD IMAGE HERE
+![Book Tracker ERD](static/images/README/book-tracker-erd.png)
 
 ### Data Model Overview
 
@@ -394,7 +394,7 @@ The live Heroku site was used for this test. The test passed with no errors or w
 
 The live Heroku site was used for this test. The test passed with no errors or warnings:
 
-![W3C results](static/images/README/wsc-jigsaw-results.png)
+![W3C results](static/images/README/w3c-jigsaw-results.png)
 
 ### Pycodestyle Results
 
