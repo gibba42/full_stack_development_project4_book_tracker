@@ -347,6 +347,12 @@ select:focus {
     color: #333333;
 }
 
+.note-card {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    max-width: 100%;
+}
+
 .note-card .button-link {
     display: inline-block;
     margin-top: 0.75rem;

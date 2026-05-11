@@ -190,9 +190,6 @@ The relationship between `User` and `Book` is a one-to-many relationship.
 
 One user can save many books, but each saved book belongs to one user.
 
-```python
-user = models.ForeignKey(User, on_delete=models.CASCADE)
-
 ## Bugs
 
 | Title | Description | Fix | Status |
@@ -201,6 +198,7 @@ user = models.ForeignKey(User, on_delete=models.CASCADE)
 | manage.py runserver command failing due to Post model | The server was unable to run due to an error with the models being imported. | The error was caused by the example blog post model being leftover after the project was changed to a book model. admin.py was updated to reference the correct model. | Resolved |
 | manage.py runserver command failing due to delete_book view | The server was unable to run due to the delete_book view not being indented correctly, and the get_object_or_404 shortcut not being imported. | Fixed the indentation issue so that the delete_book view is no longer nested within the edit_book view. Added the get_object_or_404 shortcut to the imports. | Resolved |
 | 404 error when rating a book | When a user tries to save a book rating, a 404 error is shown. | The bug was caused by the update_book_rating form not being closed properly. Updated this section so that the form is now correctly actioning. | Resolved |
+| Long notes overflowing | If a user adds a very long note, the text overflows the page and shows a horizontal scroll bar. | Updated the base css so that note cards now text wrap on overflow. | Resolved |
 
 ## Tutorials and guides used
 
