@@ -102,12 +102,12 @@ Each user story that moved out of `To Do` was further broken down into developme
 
 MoSCoW prioritisation was used to decide which features were essential for the minimum viable product and which could be deferred.
 
-| Priority | Description | User Stories |
-|----------|-------------|--------------|
-| Must Have | Essential features required for the application to meet its core purpose. | Registration, login, logout, restricted access, book search, API error handling, saving books, viewing My Library, editing records, deleting records, adding notes, editing notes, deleting notes |
-| Should Have | Useful features that would improve the application but were not essential for the MVP. | Editing profile details |
-| Could Have | Desirable stretch features that could be added if time allowed. | Password reset, reading statistics, advanced filtering |
-| Won't Have This Time | Features intentionally deferred from the final submitted version. | Social features, public book reviews, sharing libraries, advanced analytics |
+| Priority | Description |
+|----------|-------------|
+| Must Have | Essential features required for the application to meet its core purpose. |
+| Should Have | Useful features that would improve the application but were not essential for the MVP. |
+| Could Have | Desirable stretch features that could be added if time allowed. |
+| Won't Have This Time | Features intentionally deferred from the final submitted version. |
 
 ---
 
