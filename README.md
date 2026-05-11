@@ -394,6 +394,36 @@ The live Heroku site was used for this test. The test passed with no errors or w
 
 ![W3C results](static/images/README/wsc-jigsaw-results.png)
 
+### Pycodestyle Results
+
+The final version of the code was tested against PEP8 using the pycodestyle command:
+
+![pycodestyle results](static/images/README/pycodestyle-results.png)
+
+The shown flagged issues are considered acceptable. They all relate to lines being over 79 characters. In most cases they are only slightly over, or they are the default settings.py values.
+
+### Lighthouse Results
+
+The live Heroku site was tested using Google's Lighthouse extension. Lighthouse tests for performance, accessibility, best practices and SEO. Tests were carried out on both desktop and mobile views:
+
+![Lighthouse results, desktop](static/images/README/lighthouse-desktop-results.png)
+
+![Lighthouse results, mobile](static/images/README/lighthouse-mobile-results.png)
+
+Both tests performed highly.
+
+### Responsiveness Tests
+
+The live Heroku site was tested for mobile responsiveness using Google development tools. The site was tested to a width of 300px, which was considered the lowest screen size a user would reasonable use:
+
+![Home page mobile responsiveness](static/images/README/home-page-mobile-test.png)
+
+![My Library mobile responsiveness](static/images/README/my-library-mobile-test.png)
+
+![Book search mobile responsiveness](static/images/README/book-search-mobile-test.png)
+
+As shown above, elements scale appropriately at different resolutions.
+
 ---
 
 ## Bugs
@@ -414,7 +444,7 @@ The live Heroku site was used for this test. The test passed with no errors or w
 
 Due to time constraints the following "Could" or "Should" features were not implemented, but should be considered if the project is further developed:
 
- - Edit account details. This feature was not implemented, which is why users are not able to navigate to the "My account" page after logging in. It was decided that it would be confusing for users to have access to a page with no working features. 
+ - Edit account details. This feature was not implemented, which is why the "My account" page was not included in the nav bar. It was decided that it would be confusing for users to have access to a page with no working features. 
  - Reset password. This feature was not implemented, but would be a signficant improvement to the user experience. This would be a priority improvement. 
  - Reading statistics. These would be an interesting feature for users, but do not add significant value and as such were the last item in the backlog.
 
