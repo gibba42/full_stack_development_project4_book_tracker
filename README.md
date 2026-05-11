@@ -1,47 +1,102 @@
 # Book Tracker
 
-A reading journal and analysis tool for aspiring authors. This application allows users to search for books, track what they have read, and record structured notes and ratings. 
+ADD MOCKUP IMAGE HERE
 
-This application is built using:
+Book Tracker is a full-stack reading journal and book analysis application designed for readers, students and aspiring authors.
 
-- HTML
-- CSS
+The application allows users to search for books using the Open Library API, save selected books to a personal library, rate them, and record structured notes. Unlike a simple reading log, Book Tracker is aimed particularly at users who want to analyse books from a writer’s perspective, including themes, structure, character arcs and personal reflections.
+
+This project was built as a data-driven Django application using a PostgreSQL database. It includes user authentication, protected user-owned data, full CRUD functionality and deployment to a cloud platform.
+
+## Live Site
+
+- Live site: ADD HEROKU LINK HERE
+- Repository: [GitHub Repository](https://github.com/gibba42/full_stack_development_project4_book_tracker)
+
+## Technologies Used
+
+- HTML5
+- CSS3
 - JavaScript
-- Python with Django framework
-- PostgreSQL database
+- Python
+- Django
+- PostgreSQL
 - Open Library API
+- Heroku
+- Git
+- GitHub
+- Figma
 
 ## Table of Contents
 
 1. [Project Purpose](#project-purpose)
-   - Target Audience
-   - Project Goals
-   - User Stories
-2. [Wireframes](]#wireframes)
+   - [Target Audience](#target-audience)
+   - [Project Goals](#project-goals)
+   - [User Stories](#user-stories)
+2. [Agile Planning](#agile-planning)
+   - [Epics](#epics)
+   - [User Stories and Acceptance Criteria](#user-stories-and-acceptance-criteria)
+   - [MoSCoW Prioritisation](#moscow-prioritisation)
+3. [UX Design](#ux-design)
+   - [Design Goals](#design-goals)
+   - [Wireframes](#wireframes)
+   - [Colour Scheme](#colour-scheme)
+   - [Typography](#typography)
+4. [Features](#features)
+5. [Data Model](#data-model)
+   - [Entity Relationship Diagram](#entity-relationship-diagram)
+   - [User Model](#user-model)
+   - [Book Model](#book-model)
+   - [Book Note Model](#book-note-model)
+6. [Technologies Used](#technologies-used)
+7. [Testing](#testing)
+   - [Manual Testing](#manual-testing)
+   - [User Story Testing](#user-story-testing)
+   - [Python Testing](#python-testing)
+   - [JavaScript Testing](#javascript-testing)
+   - [Validator Testing](#validator-testing)
+   - [Responsiveness Testing](#responsiveness-testing)
+8. [Bugs](#bugs)
+9. [Deployment](#deployment)
+10. [Security Features](#security-features)
+11. [Credits](#credits)
+12. [Future Improvements](#future-improvements)
   
-## Project Purpose 
+## Project Purpose
 
-The purpose of this project is to create a **data-driven, full-stack web application** that allows users to manage and analyse their reading habits.
+The purpose of Book Tracker is to provide a simple, focused tool for recording and analysing books.
 
-The application enables users to:
-- Search for books using an external API
-- Save books to their personal library
-- Add structured notes and ratings
-- Analyse books from a writer’s perspective (themes, structure, character arcs)
+Many book tracking tools focus only on whether a user has read a book and what rating they gave it. Book Tracker expands on this by allowing users to record structured notes that are useful for deeper reflection, particularly for aspiring authors who want to learn from the books they read.
+
+The application allows users to:
+
+- Search for books using the Open Library API
+- Save books to their own personal library
+- Rate saved books
+- Add structured notes about each book
+- Edit and delete saved book records
+- Manage their own data securely through an authenticated account
 
 ### Target Audience
 
-- Readers who want to track books they've read
-- Aspiring authors analysing storytelling techniques
+Book Tracker is aimed at:
+
+- Readers who want to maintain a personal reading log
+- Aspiring authors who want to analyse storytelling techniques
 - Students studying literature
-- Casual users looking for a personal reading log
+- Casual users who want a private record of books they have read
 
 ### Project Goals
 
-- Provide a clean, intuitive UI for managing books
-- Implement full CRUD functionality for user-generated content
-- Ensure secure authentication and role-based access
-- Follow Agile methodology to plan and deliver the application
+The main goals of this project are to:
+
+- Build a database-backed Django web application
+- Implement user authentication and protected user data
+- Allow users to create, read, update and delete their own book records
+- Integrate an external API to allow users to search for books
+- Provide a clean and responsive user interface
+- Use Agile planning to manage the development process
+- Deploy the finished application to a cloud platform
 
 ### User Stories
 
