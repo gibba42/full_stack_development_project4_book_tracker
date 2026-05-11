@@ -98,6 +98,8 @@ The main goals of this project are to:
 - Use Agile planning to manage the development process
 - Deploy the finished application to a cloud platform
 
+## Agile Planning
+
 ### User Stories
 
 More detailed User Stories are captured in Github issues, but at a high-level this application aims to meet the following wants:
@@ -109,23 +111,9 @@ More detailed User Stories are captured in Github issues, but at a high-level th
 - As a user, I want to edit or delete entries so that I can manage my data
 - As a user, I want to register an account so that my data is secure
 
-## ERD Diagrams
+## UX Design
 
-### User model
-
-This project uses Django's build in user model
-
-### Book model
-
-| Key | Title | Type |
-|-----|-------|------|
-
-### Book notes
-
-| Key | Title | Type |
-|-----|-------|------|
-
-## Wireframes
+### Wireframes
 
 The wireframes for this project were developed using Figma. 
 
@@ -136,6 +124,74 @@ The wireframes for this project were developed using Figma.
 ### Login page
 
 ### My Library page
+
+## Data Model
+
+Book Tracker uses a relational database to store user-owned book records. The application uses Django’s built-in `User` model for authentication and custom models to store books, ratings and notes.
+
+The data model is designed around the core purpose of the application: allowing each registered user to build and manage their own personal reading library.
+
+Each saved book belongs to one user. This ensures that users can only view, edit and delete their own saved books.
+
+### Entity Relationship Diagram
+
+ADD ERD HERE
+
+The database contains the following main relationships:
+
+- A `User` can have many saved `Book` records.
+- Each `Book` record belongs to one `User`.
+- Each saved `Book` stores information retrieved from the Open Library API, along with user-generated data such as ratings and notes.
+
+### Database Schema
+
+### User Model
+
+This project uses Django’s built-in `User` model.
+
+The `User` model is used to:
+
+- Register new users
+- Authenticate login and logout
+- Link saved books to the correct user
+- Restrict users so they can only access their own saved book records
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | AutoField | Primary key for the user |
+| username | CharField | Unique username used to log in |
+| password | CharField | Hashed password managed by Django |
+| email | EmailField | Optional user email address |
+| first_name | CharField | Optional first name |
+| last_name | CharField | Optional last name |
+| is_active | BooleanField | Identifies whether the user account is active |
+| date_joined | DateTimeField | Date and time the user account was created |
+
+### Book Model
+
+The `Book` model stores books saved by users to their personal library.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | AutoField | Primary key for the saved book record |
+| user | ForeignKey | Links the saved book to the logged-in user |
+| title | CharField | Stores the title of the book |
+| author | CharField | Stores the author of the book |
+| open_library_key | CharField | Stores the unique Open Library identifier for the book |
+| cover_url | URLField | Stores the URL for the book cover image, where available |
+| rating | IntegerField | Stores the user's rating for the book |
+| notes | TextField | Stores the user's general notes about the book |
+| created_at | DateTimeField | Records when the book was saved |
+| updated_at | DateTimeField | Records when the book record was last updated |
+
+### Model Relationship
+
+The relationship between `User` and `Book` is a one-to-many relationship.
+
+One user can save many books, but each saved book belongs to one user.
+
+```python
+user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 ## Bugs
 
