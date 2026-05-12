@@ -130,6 +130,10 @@ The Epics, User Stories, and associated tasks were captured and managed in Githu
 
 ![Github project board](static/images/README/github-project-board.png)
 
+The board can be found here:
+
+[Github project board](https://github.com/users/gibba42/projects/3/views/1)
+
 The board was used to track work through:
 
 | Stage | Purpose |
