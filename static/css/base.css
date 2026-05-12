@@ -358,6 +358,46 @@ select:focus {
     margin-top: 0.75rem;
 }
 
+/* Site messages */
+
+.messages {
+    width: min(100% - 2rem, var(--container-width));
+    margin: 1rem auto 0;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: var(--border-width) solid var(--color-border);
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.message p {
+    margin: 0;
+}
+
+.message-close {
+    flex-shrink: 0;
+    width: auto;
+    min-width: 2rem;
+    padding: 0.25rem 0.6rem;
+    border: var(--border-width) solid var(--color-border);
+    background-color: var(--color-button);
+    color: var(--color-white);
+    cursor: pointer;
+    line-height: 1;
+    text-align: center;
+}
+
+.message-close:hover,
+.message-close:focus {
+    background-color: var(--color-button-hover);
+}
+
 /* Mobile responsiveness */
 
 @media (max-width: 800px) {

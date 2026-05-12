@@ -47,9 +47,18 @@
     </header>
 
     {% if messages %}
-        <section aria-label="Site messages">
+        <section class="messages" aria-label="Site messages">
             {% for message in messages %}
-                <p>{{ message }}</p>
+                <div class="message message-{{ message.tags }}">
+                    <p>{{ message }}</p>
+                    <button
+                        type="button"
+                        class="message-close"
+                        aria-label="Dismiss message"
+                    >
+                        &times;
+                    </button>
+                </div>
             {% endfor %}
         </section>
     {% endif %}
@@ -58,5 +67,7 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

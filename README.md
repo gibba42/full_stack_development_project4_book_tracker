@@ -29,6 +29,49 @@ This project was built as a data-driven Django application using a PostgreSQL da
 - ChatGPT
 
 ## Table of Contents
+
+1. [Live Site](#live-site)
+2. [Technologies Used](#technologies-used)
+3. [Project Purpose](#project-purpose)
+   - [Target Audience](#target-audience)
+   - [Project Goals](#project-goals)
+4. [Agile Planning](#agile-planning)
+   - [User Stories](#user-stories)
+   - [GitHub Project](#github-project)
+   - [MoSCoW Prioritisation](#moscow-prioritisation)
+5. [UX Design](#ux-design)
+   - [Wireframes](#wireframes)
+6. [Features](#features)
+   - [Home Page](#home-page)
+   - [Registration Page](#registration-page)
+   - [Login Page](#login-page)
+   - [My Account Page](#my-account-page)
+   - [Book Search](#book-search)
+   - [My Library Page](#my-library-page)
+   - [Book Details and Notes](#book-details-and-notes)
+7. [Data Model](#data-model)
+   - [Entity Relationship Diagram](#entity-relationship-diagram)
+   - [Data Model Overview](#data-model-overview)
+   - [Model Relationships](#model-relationships)
+   - [User Model](#user-model)
+   - [Book Model](#book-model)
+   - [BookNote Model](#booknote-model)
+8. [Testing](#testing)
+   - [Manual Testing](#manual-testing)
+9. [Validation](#validation)
+   - [W3C HTML Validation Results](#w3c-html-validation-results)
+   - [W3C Jigsaw Validation Results](#w3c-jigsaw-validation-results)
+   - [Pycodestyle Results](#pycodestyle-results)
+   - [Lighthouse Results](#lighthouse-results)
+   - [Responsiveness Tests](#responsiveness-tests)
+10. [Bugs](#bugs)
+11. [Deployment](#deployment)
+    - [Local Preparation](#local-preparation)
+    - [PostgreSQL Setup Steps](#postgresql-setup-steps)
+    - [Heroku Deployment Steps](#heroku-deployment-steps)
+12. [Security](#security)
+13. [Not Implemented / Future Features](#not-implemented--future-features)
+14. [Tutorials and Guides Used](#tutorials-and-guides-used)
   
 ## Project Purpose
 
@@ -418,7 +461,7 @@ Both tests performed highly.
 
 ### Responsiveness Tests
 
-The live Heroku site was tested for mobile responsiveness using Google development tools. The site was tested to a width of 300px, which was considered the lowest screen size a user would reasonable use:
+The live Heroku site was tested for mobile responsiveness using Google development tools. The site was tested to a width of 300px, which was considered the lowest screen size a user would reasonably use:
 
 ![Home page mobile responsiveness](static/images/README/home-page-mobile-test.png)
 
@@ -444,79 +487,65 @@ As shown above, elements scale appropriately at different resolutions.
 
 ## Deployment
 
-## Deployment
-
-The project was deployed to Heroku using the following process.
+The project was deployed to Heroku using a PostgreSQL database.
 
 ### Local Preparation
 
-Before deployment, the following files were checked and updated:
+Before deployment, the following checks and updates were completed:
 
-- `requirements.txt` was updated using `pip freeze > requirements.txt`
-- `Procfile` was added with the command needed to run the application
-- `DEBUG` was set to `False`
-- `env.py` was added to `.gitignore`
-- `SECRET_KEY` was stored as an environment variable
-- `DATABASE_URL` was stored as an environment variable
-- WhiteNoise was configured to serve static files in production
-- `ALLOWED_HOSTS` was updated to allow the Heroku domain
+- `requirements.txt` was updated using `pip freeze > requirements.txt`.
+- A `Procfile` was created to tell Heroku how to run the application.
+- `DEBUG` was set to `False` in `settings.py`.
+- `env.py` was added to `.gitignore` so that environment variables were not committed to GitHub.
+- `SECRET_KEY` was stored as an environment variable.
+- `DATABASE_URL` was stored as an environment variable.
+- WhiteNoise was configured to serve static files in production.
+- `ALLOWED_HOSTS` was updated to allow the Heroku domain.
 
 ### PostgreSQL Setup Steps
 
-1. Create a new database on PostgreSQL. This project uses a database provided by Code Institute.
-2. From the PostgreSQL dashboard, copy the connection URL.
-3. Paste the URL into your env.py file:
-   ```python
-   import os
-   os.environ["DATABASE_URL"] = "YOUR CONNECTION URL"
-   ```
+1. A PostgreSQL database was created using the database provider supplied by Code Institute.
+2. The database connection URL was copied from the database dashboard.
+3. The connection URL and secret key were added to the local `env.py` file:
+
+    ```python
+    import os
+
+    os.environ["DATABASE_URL"] = "YOUR_DATABASE_URL"
+    os.environ["SECRET_KEY"] = "YOUR_SECRET_KEY"
+    ```
 
 ### Heroku Deployment Steps
 
 1. Log in to Heroku.
-2. Create a new Heroku app (Click `New` then `Create a new app`).
-3. Add an app name. This must be unique and only have lower case letters (no spaces).
-4. Select a region.
-5. Click `Create App`.
-6. Click on the `Settings` tab.
-7. Click `Reveal Config Vars`.
-8. Set your environment variables to match those in the private `env.py` file:
+2. Create a new Heroku app.
+3. Choose a unique app name and select a region.
+4. Open the Heroku app dashboard.
+5. Go to the **Settings** tab.
+6. Click **Reveal Config Vars**.
+7. Add the following Config Vars:
 
-| Key | Value |
-|-----|-------|
-| DATABASE_URL | Paste the postgre connection URL |
-| SECRET_KEY | A randomly generated key |
+    | Key | Value |
+    |---|---|
+    | DATABASE_URL | The PostgreSQL database connection URL |
+    | SECRET_KEY | A randomly generated secret key |
 
-9. In your IDE, run:
-```python
-pip install -r requirements.txt
-```
-Then
-```python
-pip freeze > requirements.txt
-```
-10. Then run:
-```python
-echo web: gunicorn YOUR_APP_NAME.wsgi > Procfile
-```
-**Note:** replace YOUR_APP_NAME with the name of your Django app name
+8. Connect the Heroku app to the GitHub repository.
+9. Select the `main` branch for deployment.
+10. Deploy the branch.
+11. The project should now be connected to Heroku. Click `Open app` to run the site.
 
-11. To connect to Heroku, run:
-```python
-heroku login -i
-```
-12. Run:
-```python
-heroku git:remote -a YOUR_APP_NAME
-```
-**Note:** replace YOUR_APP_NAME with the name of your Django app name
-13. Run:
-```python
-git push heroku main
-```
+### Static Files
 
-The project should now be deployed to Heroku.
+Static files are handled using WhiteNoise.
 
+WhiteNoise was added to `requirements.txt` and configured in `settings.py`.
+
+The following middleware was added below Django's `SecurityMiddleware`:
+
+```python
+'whitenoise.middleware.WhiteNoiseMiddleware',
+```
 
 ---
 
@@ -534,7 +563,7 @@ The final deployed version of the site uses the following security features:
 Due to time constraints the following "Could" or "Should" features were not implemented, but should be considered if the project is further developed:
 
  - Edit account details. This feature was not implemented, which is why the "My account" page was not included in the nav bar. It was decided that it would be confusing for users to have access to a page with no working features. 
- - Reset password. This feature was not implemented, but would be a signficant improvement to the user experience. This would be a priority improvement. 
+ - Reset password. This feature was not implemented, but would be a significant improvement to the user experience. This would be a priority improvement. 
  - Reading statistics. These would be an interesting feature for users, but do not add significant value and as such were the last item in the backlog.
 
  ---
