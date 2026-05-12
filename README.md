@@ -25,6 +25,8 @@ This project was built as a data-driven Django application using a PostgreSQL da
 - Git
 - GitHub
 - Figma
+- dbdiagram.io
+- ChatGPT
 
 ## Table of Contents
   
@@ -459,19 +461,62 @@ Before deployment, the following files were checked and updated:
 - WhiteNoise was configured to serve static files in production
 - `ALLOWED_HOSTS` was updated to allow the Heroku domain
 
+### PostgreSQL Setup Steps
+
+1. Create a new database on PostgreSQL. This project uses a database provided by Code Institute.
+2. From the PostgreSQL dashboard, copy the connection URL.
+3. Paste the URL into your env.py file:
+   ```python
+   import os
+   os.environ["DATABASE_URL"] = "YOUR CONNECTION URL"
+   ```
+
 ### Heroku Deployment Steps
 
 1. Log in to Heroku.
-2. Create a new Heroku app.
-3. Add a PostgreSQL database to the app.
-4. Open the Heroku app settings.
-5. Add the following Config Vars:
-   - `SECRET_KEY`
-   - `DATABASE_URL`
-6. Connect the Heroku app to the GitHub repository.
-7. Select the `main` branch for deployment.
-8. Deploy the branch.
-9. Open the Heroku terminal or use the CLI to run migrations 
+2. Create a new Heroku app (Click `New` then `Create a new app`).
+3. Add an app name. This must be unique and only have lower case letters (no spaces).
+4. Select a region.
+5. Click `Create App`.
+6. Click on the `Settings` tab.
+7. Click `Reveal Config Vars`.
+8. Set your environment variables to match those in the private `env.py` file:
+
+| Key | Value |
+|-----|-------|
+| DATABASE_URL | Paste the postgre connection URL |
+| SECRET_KEY | A randomly generated key |
+
+9. In your IDE, run:
+```python
+pip install -r requirements.txt
+```
+Then
+```python
+pip freeze > requirements.txt
+```
+10. Then run:
+```python
+echo web: gunicorn YOUR_APP_NAME.wsgi > Procfile
+```
+**Note:** replace YOUR_APP_NAME with the name of your Django app name
+
+11. To connect to Heroku, run:
+```python
+heroku login -i
+```
+12. Run:
+```python
+heroku git:remote -a YOUR_APP_NAME
+```
+**Note:** replace YOUR_APP_NAME with the name of your Django app name
+13. Run:
+```python
+git push heroku main
+```
+
+The project should now be deployed to Heroku.
+
 
 ---
 
