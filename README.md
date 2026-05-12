@@ -449,6 +449,12 @@ The final version of the code was tested against PEP8 using the pycodestyle comm
 
 The shown flagged issues are considered acceptable. They all relate to lines being over 79 characters. In most cases they are only slightly over, or they are the default settings.py values.
 
+### JSHint results
+
+Minimal JavaScript was used for this project, the main functionality is handled through Django and Python. Javascript was used to improve the appearance of message notifications. This was tested using JSHint:
+
+![JSHint results](static/images/README/jshint-results.png)
+
 ### Lighthouse Results
 
 The live Heroku site was tested using Google's Lighthouse extension. Lighthouse tests for performance, accessibility, best practices and SEO. Tests were carried out on both desktop and mobile views:
